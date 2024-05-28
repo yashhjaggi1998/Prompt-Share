@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation"
 
 const PromptCard = (prop) => {
   const post = prop.post
+  post.tag = transformString(post.tag)
   const handleTagClicks = prop.handleTagClicks
   const handleEdit = prop.handleEdit
   const handleDelete = prop.handleDelete
@@ -21,6 +22,10 @@ const PromptCard = (prop) => {
 
     router.push(`/profile/${post.creator._id}?name=${post.creator.username}`);
   };
+
+  function transformString(inputString) {
+    return '#' + inputString.replace(/\s/g, '').replace(/^#?/, '');
+}
 
   const handleCopy = () => {
     setCopied(post.prompt)

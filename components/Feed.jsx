@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import PromptCard from "./PromptCard";
-
+import Loading from "./layout";
 const Feed = () => {
 
   const PromptCardList = ({ data, handleTagClick }) => {
@@ -26,6 +26,7 @@ const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 
@@ -34,6 +35,7 @@ const Feed = () => {
       const data = await response.json();
   
       setAllPosts(data);
+      setLoading(false);
     };
 
     fetchPosts();
@@ -73,6 +75,9 @@ const Feed = () => {
     setSearchText('');
   };
 
+  if (loading) {
+    return <Loading/>
+  }
 
   return (
     <section className='feed'>
@@ -84,7 +89,7 @@ const Feed = () => {
           value={searchText}
           onChange={handleSearchChange}
           required
-          className="w-11/12"
+          className="w-11/12 focus:outline-none"
         />
         {searchText && (
         <button onClick={handleClearClick}>

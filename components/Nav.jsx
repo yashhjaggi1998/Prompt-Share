@@ -30,9 +30,10 @@ const Nav = () => {
         <Image 
         src='/assets/images/chat-bot.gif'
         alt='Logo'
-        width={45}
-        height={45}
+        width={55}
+        height={55}
         className='object-contain'
+        unoptimized = {true}
         />
         <p className='logo_text'>Inspire AI</p>
       </Link>
@@ -48,11 +49,11 @@ const Nav = () => {
               Sign Out
             </button>
 
-              <Image src={session?.user.image}
+              <Image src={session?.user?.image}
               alt='profile'
               width={37}
               height={37}
-              className='rounded-full'
+              className='rounded-full cursor-pointer'
               onClick={()=> setToggleDropdown((prev)=>!prev)}/>
             
 
@@ -83,7 +84,13 @@ const Nav = () => {
                 <button
                 type='button'
                 key = {provider.name}
-                onClick={()=> signIn(provider.id)}
+                onClick={(e)=> 
+                  {
+                    e.preventDefault()
+                    signIn(provider.id)
+                  }
+                  
+                }
                 className='black_btn'>
                   Sign In
                 </button>
@@ -97,16 +104,16 @@ const Nav = () => {
       <div className='sm:hidden flex relative'>
         {session?.user ? (
           <div className='flex'>
-             <Image src='/assets/images/logo.svg'
+             <Image src={session?.user?.image}
               alt='profile'
               width={37}
               height={37}
-              className='rounded-full'
+              className='rounded-full cursor-pointer'
               onClick={()=> setToggleDropdown((prev)=>!prev)}/>
 
             {toggleDropdown && (
               <div className='dropdown'>
-                 <Link 
+                <Link 
                 className='dropdown_link'
                 href="/edit-profile"
                 onClick={()=> setToggleDropdown(false)}>
@@ -117,7 +124,7 @@ const Nav = () => {
                 href="/profile"
                 className='dropdown_link'
                 onClick={()=> setToggleDropdown(false)}>
-                  Manage Your Prompts
+                  Mange your Prompts
                 </Link>
 
                 <Link 
@@ -133,7 +140,7 @@ const Nav = () => {
                   setToggleDropdown(false);
                   signOut();
                 }}
-                className='mt-5 w-full black_btn'>
+                className='w-full black_btn'>
                   Sign Out
                 </button>
 
@@ -150,7 +157,13 @@ const Nav = () => {
                 <button
                 type='button'
                 key = {provider.name}
-                onClick={()=> signIn(provider.id)}
+                onClick={(e)=> 
+                  {
+                    e.preventDefault()
+                    signIn(provider.id)
+                  }
+                  
+                }
                 className='black_btn'>
                   Sign In
                 </button>
