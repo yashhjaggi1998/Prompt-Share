@@ -24,7 +24,7 @@ const PromptCard = (prop) => {
   };
 
   function transformString(inputString) {
-    return '#' + inputString.replace(/\s/g, '').replace(/^#?/, '');
+    return '#' + inputString.replace(/^#?/, '');
 }
 
   const handleCopy = () => {
